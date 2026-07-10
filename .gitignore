@@ -1,0 +1,14 @@
+# Security
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Project Folders
+downloads/
+outputs/
+bgm_library/
+
+# Logs
+bot.log
