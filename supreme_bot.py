@@ -829,8 +829,25 @@ async def main():
             BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 
     if not API_ID or not API_HASH or not BOT_TOKEN:
-        print("ERROR: API_ID, API_HASH, and BOT_TOKEN must be set via environment variables.")
+        print(
+            "ERROR: API_ID, API_HASH, and BOT_TOKEN must be set.\n"
+            "Set them as environment variables or create a .env file in this folder:\n\n"
+            "  API_ID=1234567\n"
+            "  API_HASH=your_api_hash\n"
+            "  BOT_TOKEN=123456:your_bot_token\n\n"
+            "Get API_ID / API_HASH from https://my.telegram.org and BOT_TOKEN from @BotFather."
+        )
         sys.exit(1)
+
+    # Verify ffmpeg / ffprobe are available, otherwise transforms will silently fail.
+    for tool in ("ffmpeg", "ffprobe"):
+        if shutil.which(tool) is None:
+            print(
+                f"ERROR: '{tool}' was not found on PATH. Install FFmpeg first.\n"
+                "  Debian/Ubuntu: sudo apt-get install -y ffmpeg\n"
+                "  macOS (brew):  brew install ffmpeg"
+            )
+            sys.exit(1)
 
     bot = SupremeTransformBot()
     try:
