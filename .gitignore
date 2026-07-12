@@ -12,3 +12,7 @@ bgm_library/
 
 # Logs
 bot.log
+
+# Pyrogram session files
+*.session
+*.session-journal
